@@ -1,7 +1,7 @@
 import cv2
 
 
-# image = cv2.imread("germany.png")
+image = cv2.imread("germany.png")
 
 # if image is not None:
 #     cv2.imshow("Image Editor", image)
@@ -23,22 +23,38 @@ import cv2
 
 
 print("---- Welcome to OpenCV --------")
-img_loc = input("Give me image location for which you want to convert ot grayscale: ")
-image = cv2.imread(img_loc)
-if image is not None:
-    grey_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    user_decision = input("Do you want to save/show image? Press y for 'save; and n for 'show'")
-    if user_decision == 'y':
-        img_loc_output = input("Give me exact location to save the image")
-        cv2.imwrite(img_loc_output, grey_img)
-    elif user_decision == 'n':
-        cv2.imshow("Image Editor", grey_img)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-    else:
-        print("Write either 'y' or 'n'")  
-else:
-    print("Picture didnot Load :(")              
+# img_loc = input("Give me image location for which you want to convert ot grayscale: ")
+# image = cv2.imread(img_loc)
+# if image is not None:
+#     grey_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+#     user_decision = input("Do you want to save/show image? Press y for 'save; and n for 'show'")
+#     if user_decision == 'y':
+#         img_loc_output = input("Give me exact location to save the image")
+#         cv2.imwrite(img_loc_output, grey_img)
+#     elif user_decision == 'n':
+#         cv2.imshow("Image Editor", grey_img)
+#         cv2.waitKey(0)
+#         cv2.destroyAllWindows()
+#     else:
+#         print("Write either 'y' or 'n'")  
+# else:
+#     print("Picture didnot Load :(")
+
+
+
+## IMAGE MODIFICATION
+# Image Crop
+
+cropped_image = image[100:200,50:150]
+cv2.imshow("Image", cropped_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# Image Resize
+resized_img = cv2.resize(image,(100,100))
+cv2.imshow("Image", resized_img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 
 
