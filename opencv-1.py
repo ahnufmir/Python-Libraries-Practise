@@ -79,13 +79,48 @@ print("---- Welcome to OpenCV --------")
 
 # Drawing Shapes
 
-img = np.zeros((500,500,3))
+img = np.zeros((512,512,3))
 
-cv2.rectangle(img, pt1=(100,100), pt2=(200,250), color=(0,0,255), thickness=-1)
-cv2.line(img, pt1=(0,0), pt2=(500,500), color=(255,0,0), thickness=10)
-cv2.circle(img, center=(250,300), radius=50, color=(0,255,0), thickness=1)
-cv2.putText(img, org=(300,300), fontFace=cv2.FONT_HERSHEY_COMPLEX, fontScale=1, color = (255,255,0), lineType=cv2.LINE_AA, text="Hello")
-cv2.imshow("window", img)
-cv2.waitKey(0)
+# cv2.rectangle(img, pt1=(100,100), pt2=(200,250), color=(0,0,255), thickness=-1)
+# cv2.line(img, pt1=(0,0), pt2=(500,500), color=(255,0,0), thickness=10)
+# cv2.circle(img, center=(250,300), radius=50, color=(0,255,0), thickness=1)
+# cv2.putText(img, org=(300,300), fontFace=cv2.FONT_HERSHEY_COMPLEX, fontScale=1, color = (255,255,0), lineType=cv2.LINE_AA, text="Hello")
+# cv2.imshow("window", img)
+# cv2.waitKey(0)
+
+# Event Handling
+
+flag = False
+initial_pos_x = -1
+initial_pos_y = -1
+
+def draw(event, x, y, flags, params):
+    global flag, initial_pos_x, initial_pos_y
+
+    if event == 1:
+        flag = True 
+        initial_pos_x  = x
+        initial_pos_y = y
+
+    elif event == 0:    
+        if flag == True:
+            cv2.rectangle(img, pt1=(initial_pos_x,initial_pos_y), pt2= (x,y), color = (0,255,255), thickness=1)
+
+    elif event == 4:
+        flag = False         
+        # cv2.line(img, pt1=(initial_pos_x,initial_pos_y), pt2= (x,y), color = (255,0,0), thickness=1)
+        cv2.rectangle(img, pt1=(initial_pos_x, initial_pos_y), pt2=(x,y), color=(0,255,255), thickness=-1)
+
+
+
+cv2.namedWindow(winname="window")
+cv2.setMouseCallback("window", draw)
+while True:
+    cv2.imshow("window",img)
+    if cv2.waitKey(1) & 0xFF == ord('x'):
+        break
+
+cv2.destroyAllWindows()    
+
 
 
