@@ -16,3 +16,5 @@ speak = wincom.Dispatch("SAPI.SpVoice")
 
 text = f"Weather in {city} city is {degrees} degree celcius and today is {cond}"
 speak.Speak(text)
+
+#testing my ssh connection
